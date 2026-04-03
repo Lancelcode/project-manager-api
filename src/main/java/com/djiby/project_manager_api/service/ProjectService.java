@@ -29,4 +29,10 @@ public class ProjectService {
     }
     return null;
 }
+
+public Project createProject(Project project) {
+    project.setId((long) (projects.size() + 1));
+    projects.add(project);
+    return project;
+}
 }

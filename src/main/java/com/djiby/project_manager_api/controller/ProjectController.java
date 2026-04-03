@@ -5,6 +5,8 @@ import com.djiby.project_manager_api.service.ProjectService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -25,5 +27,10 @@ public class ProjectController {
     @GetMapping("/projects/{id}")
     public Project getProjectById(@PathVariable Long id) {
         return projectService.getProjectById(id);
+    }
+
+    @PostMapping("/projects")
+    public Project createProject(@RequestBody Project project) {
+        return projectService.createProject(project);
     }
 }
