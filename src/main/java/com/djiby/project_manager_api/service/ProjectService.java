@@ -48,4 +48,14 @@ public Project updateProject(Long id, Project updatedProject) {
     return null;
 }
 
+public Project deleteProject(Long id) {
+    for (int i = 0; i < projects.size(); i++) {
+        Project project = projects.get(i);
+        if (project.getId().equals(id)) {
+            projects.remove(i);
+            return project;
+        }
+    }
+    return null;
+}
 }
