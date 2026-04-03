@@ -35,4 +35,17 @@ public Project createProject(Project project) {
     projects.add(project);
     return project;
 }
+
+public Project updateProject(Long id, Project updatedProject) {
+    for (Project project : projects) {
+        if (project.getId().equals(id)) {
+            project.setName(updatedProject.getName());
+            project.setDescription(updatedProject.getDescription());
+            project.setStatus(updatedProject.getStatus());
+            return project;
+        }
+    }
+    return null;
+}
+
 }

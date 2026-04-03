@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -32,5 +33,10 @@ public class ProjectController {
     @PostMapping("/projects")
     public Project createProject(@RequestBody Project project) {
         return projectService.createProject(project);
+    }
+
+    @PutMapping("/projects/{id}")
+    public Project updateProject(@PathVariable Long id, @RequestBody Project updatedProject) {
+        return projectService.updateProject(id, updatedProject);
     }
 }
