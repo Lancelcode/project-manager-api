@@ -1,12 +1,20 @@
 package com.djiby.project_manager_api.model;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class Project {
 
     private Long id;
+    
+    @NotBlank
     private String name;
+    
+    @NotNull
     private String description;
-    private ProjectStatus status;
 
+    @NotNull
+    private ProjectStatus status;
+    
     public Project() {
     }
 
