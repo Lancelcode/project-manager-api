@@ -39,17 +39,30 @@ public class ProjectController {
     }
 
     @PostMapping("/projects")
-    public Project createProject(@RequestBody Project project) {
-        return projectService.createProject(project);
+    public ResponseEntity<Project> createProject(@RequestBody Project project) {
+        Project createdProject = projectService.createProject(project);
+        return ResponseEntity.status(201).body(createdProject);
     }
 
     @PutMapping("/projects/{id}")
-    public Project updateProject(@PathVariable Long id, @RequestBody Project updatedProject) {
-        return projectService.updateProject(id, updatedProject);
+    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project updatedProject) {
+        Project project = projectService.updateProject(id, updatedProject);
+
+        if (project == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(project);
     }
 
     @DeleteMapping("/projects/{id}")
-    public Project deleteProject(@PathVariable Long id) {
-        return projectService.deleteProject(id);
+    public ResponseEntity<Project> deleteProject(@PathVariable Long id) {
+        Project project = projectService.deleteProject(id);
+
+        if (project == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(project);
     }
 }
