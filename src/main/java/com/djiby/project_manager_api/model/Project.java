@@ -1,6 +1,9 @@
 package com.djiby.project_manager_api.model;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import jakarta.validation.Valid;
 
 public class Project {
 
@@ -14,6 +17,9 @@ public class Project {
 
     @NotNull
     private ProjectStatus status;
+
+    @Valid
+    private List<Task> tasks = new ArrayList<>();
     
     public Project() {
     }
@@ -55,5 +61,13 @@ public class Project {
 
     public void setStatus(ProjectStatus status) {
         this.status = status;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
