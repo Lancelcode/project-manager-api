@@ -9,7 +9,7 @@ public class Project {
     @NotBlank
     private String name;
     
-    @NotNull
+    @NotBlank
     private String description;
 
     @NotNull
