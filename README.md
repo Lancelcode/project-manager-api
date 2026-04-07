@@ -15,4 +15,3 @@ Backend project built with Spring Boot.
 
 ```bash
 ./mvnw spring-boot:run
-
