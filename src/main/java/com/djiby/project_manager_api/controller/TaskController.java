@@ -1,6 +1,7 @@
 package com.djiby.project_manager_api.controller;
 
-import com.djiby.project_manager_api.model.Task;
+import com.djiby.project_manager_api.dto.TaskRequest;
+import com.djiby.project_manager_api.dto.TaskResponse;
 import com.djiby.project_manager_api.service.ProjectService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -19,41 +20,27 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> getTasks(@PathVariable Long projectId) {
+    public List<TaskResponse> getTasks(@PathVariable Long projectId) {
         return projectService.getTasksByProjectId(projectId);
     }
 
     @PostMapping
-    public ResponseEntity<Task> addTask(
-            @PathVariable Long projectId,
-            @Valid @RequestBody Task task) {
-
-        Task created = projectService.addTaskToProject(projectId, task);
-        return ResponseEntity.status(201).body(created);
+    public ResponseEntity<TaskResponse> addTask(@PathVariable Long projectId, @Valid @RequestBody TaskRequest request) {
+        return ResponseEntity.status(201).body(projectService.addTaskToProject(projectId, request));
     }
 
     @GetMapping("/{taskId}")
-    public Task getTask(
-            @PathVariable Long projectId,
-            @PathVariable Long taskId) {
-
+    public TaskResponse getTask(@PathVariable Long projectId, @PathVariable Long taskId) {
         return projectService.getTaskById(projectId, taskId);
     }
 
     @PutMapping("/{taskId}")
-    public Task updateTask(
-            @PathVariable Long projectId,
-            @PathVariable Long taskId,
-            @Valid @RequestBody Task task) {
-
-        return projectService.updateTask(projectId, taskId, task);
+    public TaskResponse updateTask(@PathVariable Long projectId, @PathVariable Long taskId, @Valid @RequestBody TaskRequest request) {
+        return projectService.updateTask(projectId, taskId, request);
     }
 
     @DeleteMapping("/{taskId}")
-    public ResponseEntity<Void> deleteTask(
-            @PathVariable Long projectId,
-            @PathVariable Long taskId) {
-
+    public ResponseEntity<Void> deleteTask(@PathVariable Long projectId, @PathVariable Long taskId) {
         projectService.deleteTask(projectId, taskId);
         return ResponseEntity.noContent().build();
     }
