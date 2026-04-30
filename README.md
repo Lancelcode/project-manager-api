@@ -1,8 +1,91 @@
+# Project Manager API
+
+> A RESTful backend service for managing projects, tasks, and team workflows — built with Spring Boot and Java 21.
+
+---
+
+## Why I built this
+
+Most project management tools are either too complex or too simple. This is a backend exercise in designing a clean REST API that handles real concerns: resource ownership, state transitions, and structured error responses. The goal was not to ship a product — it was to get Spring Boot, JPA, and REST design patterns into muscle memory.
+
+---
+
+## What it does
+
+- Create and manage projects with status lifecycle (`PLANNED → IN_PROGRESS → COMPLETED`)
+- Assign tasks to projects with priority levels (`LOW`, `MEDIUM`, `HIGH`) and due dates
+- JWT-based authentication — every endpoint is protected, register and login to get a token
+- Structured error responses with meaningful HTTP status codes throughout
+- Input validation with clear feedback on malformed requests
+- Auto-generated API documentation via Swagger UI at `/swagger-ui/index.html`
+
+---
+
+## Tech stack
+
+| Layer | Technology |
+|-------|-----------|
+| Language | Java 21 |
+| Framework | Spring Boot 4.0.5 |
+| Build | Maven |
+| Persistence | Spring Data JPA + PostgreSQL |
+| Auth | Spring Security + JWT (jjwt) |
+| Validation | Jakarta Bean Validation |
+| Testing | JUnit 5, Mockito |
+| Containerisation | Docker + docker-compose |
+| CI | GitHub Actions |
+
+---
+
+## Project structure
+
+```
+src/
+├── main/java/
+│   ├── controller/     # REST endpoints and request mapping
+│   ├── service/        # Business logic layer
+│   ├── repository/     # Data access layer (JPA)
+│   ├── model/          # Entity definitions
+│   ├── dto/            # Request/response objects
+│   ├── security/       # JWT filter, auth config
+│   └── exception/      # Global error handling
+└── test/
+    └── service/        # Unit tests (ProjectService)
+```
+
+---
+
+## API overview
+
+### Auth (public)
+```
+POST   /auth/register             Register a new user, returns JWT
+POST   /auth/login                Login, returns JWT
+```
+
+### Projects (requires Bearer token)
+```
+POST   /projects                  Create a new project
+GET    /projects                  List all projects
+GET    /projects/{id}             Get a project by ID
+PUT    /projects/{id}             Update a project
+DELETE /projects/{id}             Delete a project
+```
+
+### Tasks (requires Bearer token)
+```
+POST   /projects/{id}/tasks       Add a task to a project
+GET    /projects/{id}/tasks       List tasks for a project
+GET    /projects/{id}/tasks/{tid} Get a specific task
+PUT    /projects/{id}/tasks/{tid} Update a task
+DELETE /projects/{id}/tasks/{tid} Remove a task
+```
+
 ---
 
 ## Run locally
 
-### Option 1 — Docker (recommended)
+### Option 1 - Docker (recommended)
 
 **Prerequisites:** Docker Desktop
 
@@ -14,7 +97,7 @@ docker-compose up --build
 
 The API starts on `http://localhost:8080`
 
-### Option 2 — Maven
+### Option 2 - Maven
 
 **Prerequisites:** Java 21, Maven
 
@@ -84,7 +167,7 @@ Tests run automatically on every push to `main` via GitHub Actions.
 
 ## Status
 
-`Complete` — authentication, persistence, containerisation, and CI all in place. Next project focuses on [your next project idea here].
+`Complete` — authentication, persistence, containerisation, and CI all in place.
 
 ---
 
