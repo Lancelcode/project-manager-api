@@ -33,12 +33,12 @@ The goal was to understand how a production Spring Boot application actually fit
 | Feature | Description |
 |---|---|
 | 🔐 Authentication | JWT based registration and login. Every endpoint is protected by default |
-| 🗂️ Project Management | Full CRUD with a clear status lifecycle — `PLANNED → IN_PROGRESS → COMPLETED` |
-| ✅ Task Management | Tasks are scoped to projects, with priority levels and due dates |
+| 🗂️ Project Management | Full CRUD with a status lifecycle — `PLANNED → IN_PROGRESS → COMPLETED` |
+| ✅ Task Management | Tasks are scoped to projects, with priority levels (`LOW`, `MEDIUM`, `HIGH`) and due dates |
 | 🛡️ Error Handling | All errors return structured JSON with appropriate HTTP status codes |
 | ✔️ Validation | Jakarta Bean Validation on all request bodies, with readable error messages |
 | 📖 API Docs | Swagger UI auto-generated from the codebase, always in sync with the code |
-| 🐳 Docker | One command brings up the full stack, app and database included |
+| 🐳 Docker | One command brings up the full stack, application and database included |
 | ⚙️ CI | Tests run automatically on every push via GitHub Actions |
 
 ---
@@ -197,17 +197,18 @@ Building this end to end taught me more than any tutorial because the mistakes w
 - Spring's dependency injection makes sense once you understand the container. Before that it feels like magic, and not the good kind.
 - DTOs are not optional. Exposing entities directly from endpoints creates tight coupling that compounds over time.
 - A global exception handler with `@ControllerAdvice` is one of those things that seems like overhead until the first time you need it.
-- JWT authentication is straightforward once you understand the filter chain. The tricky part is avoiding circular dependencies in the security configuration.
+- JWT authentication is straightforward once you understand the filter chain. The tricky part is avoiding circular dependencies in the security configuration, and I hit that problem directly.
 - Docker Compose `depends_on` does not mean "wait until the database is ready." A healthcheck is required. I learned this the hard way.
 - Writing tests after the fact is harder than writing them first. The code tends not to be structured for testability.
 
 ---
 
-## What comes next
+## What I would do differently next time
 
-- Flyway for database migrations instead of `ddl-auto: update`
-- Pagination on list endpoints
-- Tests written before the implementation, not after
+- Write tests before the implementation, not after
+- Use Flyway or Liquibase for schema migrations instead of `ddl-auto: update`
+- Add JWT authentication from the start rather than retrofitting it into an existing codebase
+- Add pagination from the start, it is messier to retrofit than to build in
 
 ---
 
