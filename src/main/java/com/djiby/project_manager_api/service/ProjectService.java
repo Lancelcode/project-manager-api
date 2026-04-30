@@ -25,7 +25,13 @@ public class ProjectService {
     // ── mapping helpers ──────────────────────────────────────────────
 
     private TaskResponse toTaskResponse(Task task) {
-        return new TaskResponse(task.getId(), task.getTitle(), task.getStatus());
+        return new TaskResponse(
+                task.getId(),
+                task.getTitle(),
+                task.getStatus(),
+                task.getPriority(),
+                task.getDueDate()
+        );
     }
 
     private ProjectResponse toProjectResponse(Project project) {
@@ -90,6 +96,8 @@ public class ProjectService {
         Task task = new Task();
         task.setTitle(request.getTitle());
         task.setStatus(request.getStatus());
+        task.setPriority(request.getPriority());
+        task.setDueDate(request.getDueDate());
         task.setProject(project);
         project.getTasks().add(task);
         projectRepository.save(project);
@@ -104,6 +112,8 @@ public class ProjectService {
         Task task = findTaskById(projectId, taskId);
         task.setTitle(request.getTitle());
         task.setStatus(request.getStatus());
+        task.setPriority(request.getPriority());
+        task.setDueDate(request.getDueDate());
         projectRepository.save(task.getProject());
         return toTaskResponse(task);
     }
