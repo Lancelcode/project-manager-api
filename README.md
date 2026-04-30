@@ -1,12 +1,12 @@
 # Project Manager API
 
-> A RESTful backend service for managing projects, tasks, and team workflows — built with Spring Boot and Java 21.
+> A RESTful backend service for managing projects, tasks, and team workflows, built with Spring Boot and Java 21.
 
 ---
 
 ## Why I built this
 
-Most project management tools are either too complex or too simple. This is a backend exercise in designing a clean REST API that handles real concerns: resource ownership, state transitions, and structured error responses. The goal was not to ship a product — it was to get Spring Boot, JPA, and REST design patterns into muscle memory.
+Most project management tools are either too complex or too simple. This is a backend exercise in designing a clean REST API that handles real concerns: resource ownership, state transitions, and structured error responses. The goal was not to ship a product, it was to get Spring Boot, JPA, and REST design patterns into muscle memory.
 
 ---
 
