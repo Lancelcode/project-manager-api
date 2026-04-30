@@ -241,4 +241,4 @@ Every endpoint is listed with request/response schemas, validation rules, and a 
 
 ## 🌱 Part of a larger learning arc
 
-This project sits within a broader series of backend builds. See my [profile](https://github.com/Lancelcode) for the full picture — including PulseDB (database engine from scratch) and protocol-level tool rebuilds.
+This project sits within a broader series of backend builds. See my [profile](https://github.com/Lancelcode) for the full picture, including PulseDB (database engine from scratch) and protocol-level tool rebuilds.
