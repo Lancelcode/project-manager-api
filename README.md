@@ -211,7 +211,7 @@ Every endpoint is listed with request/response schemas, validation rules, and a 
 - How to write a global exception handler with `@ControllerAdvice` instead of scattering try/catch blocks
 - Why DTOs exist and why you should not expose entity objects directly from endpoints
 - How JPA's `@Transactional` interacts with lazy loading, and how to get burned by it once and never again
-- How JWT authentication works end to end — filter chain, token signing, stateless sessions
+- How JWT authentication works end to end, filter chain, token signing, stateless sessions
 - Why circular dependencies happen in Spring and how to break them cleanly
 - The difference between `depends_on` and a proper healthcheck in Docker Compose
 
@@ -235,7 +235,7 @@ Every endpoint is listed with request/response schemas, validation rules, and a 
 
 ## 📄 Status
 
-`Complete` — authentication, persistence, containerisation, and CI all in place.
+`Complete`  authentication, persistence, containerisation, and CI all in place.
 
 ---
 
