@@ -1,104 +1,63 @@
-# Project Manager API
-
-> A RESTful backend service for managing projects, tasks, and team workflows — built with Spring Boot and Java 21.
-
----
-
-## Why I built this
-
-Most project management tools are either too complex or too simple. This is a backend exercise in designing a clean REST API that handles real concerns: resource ownership, state transitions, and structured error responses. The goal was not to ship a product — it was to get Spring Boot, JPA, and REST design patterns into muscle memory.
-
----
-
-## What it does
-
-- Create and manage projects with status lifecycle (`DRAFT → ACTIVE → COMPLETED → ARCHIVED`)
-- Assign tasks to projects with priority levels and due dates
-- Filter and query projects by status, owner, or date range
-- Structured error responses with meaningful HTTP status codes throughout
-- Input validation with clear feedback on malformed requests
-
----
-
-## Tech stack
-
-| Layer | Technology |
-|-------|-----------|
-| Language | Java 21 |
-| Framework | Spring Boot 3.x |
-| Build | Maven |
-| Persistence | Spring Data JPA |
-| Validation | Jakarta Bean Validation |
-| Testing | JUnit 5, Mockito |
-
----
-
-## Project structure
-
-```
-src/
-├── main/java/
-│   ├── controller/     # REST endpoints and request mapping
-│   ├── service/        # Business logic layer
-│   ├── repository/     # Data access layer (JPA)
-│   ├── model/          # Entity definitions
-│   ├── dto/            # Request/response objects
-│   └── exception/      # Global error handling
-└── test/
-    ├── controller/     # Integration tests
-    └── service/        # Unit tests
-```
-
----
-
-## API overview
-
-```
-POST   /api/projects              Create a new project
-GET    /api/projects              List all projects (supports filtering)
-GET    /api/projects/{id}         Get a project by ID
-PUT    /api/projects/{id}         Update a project
-DELETE /api/projects/{id}         Delete a project
-
-POST   /api/projects/{id}/tasks   Add a task to a project
-GET    /api/projects/{id}/tasks   List tasks for a project
-PUT    /api/tasks/{id}            Update a task
-DELETE /api/tasks/{id}            Remove a task
-```
-
 ---
 
 ## Run locally
 
-**Prerequisites:** Java 21, Maven
+### Option 1 — Docker (recommended)
+
+**Prerequisites:** Docker Desktop
 
 ```bash
-# Clone the repo
 git clone https://github.com/Lancelcode/project-manager-api.git
 cd project-manager-api
-
-# Run the application
-./mvnw spring-boot:run
-
-# Run tests
-./mvnw test
+docker-compose up --build
 ```
 
 The API starts on `http://localhost:8080`
 
----
+### Option 2 — Maven
 
-## Example request
+**Prerequisites:** Java 21, Maven
 
 ```bash
-curl -X POST http://localhost:8080/api/projects \
+./mvnw spring-boot:run
+```
+
+Runs with H2 in-memory database. Data resets on restart.
+
+---
+
+## Example usage
+
+**Register:**
+```bash
+curl -X POST http://localhost:8080/auth/register \
   -H "Content-Type: application/json" \
+  -d '{"email": "you@example.com", "password": "secret123"}'
+```
+
+**Create a project (use your token):**
+```bash
+curl -X POST http://localhost:8080/projects \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
   -d '{
     "name": "Portfolio Rebuild",
     "description": "Redesign and redeploy personal projects",
-    "status": "ACTIVE"
+    "status": "PLANNED"
   }'
 ```
+
+**Swagger UI:** `http://localhost:8080/swagger-ui/index.html`
+
+---
+
+## Run tests
+
+```bash
+./mvnw test
+```
+
+Tests run automatically on every push to `main` via GitHub Actions.
 
 ---
 
@@ -109,20 +68,23 @@ curl -X POST http://localhost:8080/api/projects \
 - How to write a global exception handler with `@ControllerAdvice` instead of scattering try/catch blocks
 - Why DTOs exist and why you should not expose entity objects directly from endpoints
 - How JPA's `@Transactional` interacts with lazy loading — and how to get burned by it once and never again
+- How JWT authentication works end to end — filter chain, token signing, stateless sessions
+- Why circular dependencies happen in Spring and how to break them cleanly
+- The difference between `depends_on` and a proper healthcheck in Docker Compose
 
 ---
 
 ## What I would do differently next time
 
-- Add JWT authentication from the start rather than retrofitting it
 - Write tests before the implementation, not after
 - Use Flyway or Liquibase for schema migrations instead of `ddl-auto: update`
+- Add pagination from the start — retrofitting `Pageable` is messier than building it in
 
 ---
 
 ## Status
 
-`In progress` — core CRUD complete, adding task priority logic and pagination next.
+`Complete` — authentication, persistence, containerisation, and CI all in place. Next project focuses on [your next project idea here].
 
 ---
 
