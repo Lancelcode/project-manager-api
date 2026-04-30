@@ -4,6 +4,8 @@ import com.djiby.project_manager_api.dto.ProjectRequest;
 import com.djiby.project_manager_api.dto.ProjectResponse;
 import com.djiby.project_manager_api.dto.TaskRequest;
 import com.djiby.project_manager_api.dto.TaskResponse;
+import com.djiby.project_manager_api.exception.ProjectNotFoundException;
+import com.djiby.project_manager_api.exception.TaskNotFoundException;
 import com.djiby.project_manager_api.model.Project;
 import com.djiby.project_manager_api.model.Task;
 import com.djiby.project_manager_api.repository.ProjectRepository;
@@ -50,8 +52,7 @@ public class ProjectService {
     }
 
     public ProjectResponse getProjectById(Long id) {
-        Project project = findProjectById(id);
-        return toProjectResponse(project);
+        return toProjectResponse(findProjectById(id));
     }
 
     public ProjectResponse createProject(ProjectRequest request) {
@@ -117,13 +118,13 @@ public class ProjectService {
 
     private Project findProjectById(Long id) {
         return projectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
+                .orElseThrow(() -> new ProjectNotFoundException(id));
     }
 
     private Task findTaskById(Long projectId, Long taskId) {
         return findProjectById(projectId).getTasks().stream()
                 .filter(t -> t.getId().equals(taskId))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Task not found"));
+                .orElseThrow(() -> new TaskNotFoundException(taskId));
     }
 }
