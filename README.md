@@ -10,11 +10,11 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![CI](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/Lancelcode/project-manager-api/actions)
 [![JWT](https://img.shields.io/badge/Auth-JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](https://jwt.io/)
-[![Tests](https://img.shields.io/badge/Tests-6_passing-198754?style=for-the-badge)](#-testing)
+[![Tests](https://img.shields.io/badge/Tests-6_passing-198754?style=for-the-badge)](#testing)
 
 *A fully containerised backend API with JWT authentication, real database persistence, automated CI, and Swagger documentation, built from scratch.*
 
-[🚀 Quick Start](#-quick-start) · [🔐 Auth](#-authentication) · [📡 Endpoints](#-api-endpoints) · [🧪 Tests](#-testing) · [📖 Docs](#-api-documentation)
+[🚀 Quick Start](#quick-start) · [🔐 Auth](#authentication) · [📡 Endpoints](#api-endpoints) · [🧪 Tests](#testing) · [📖 Docs](#api-documentation)
 
 </div>
 
@@ -22,7 +22,7 @@
 
 ## 📌 About the Project
 
-**Project Manager API** is a RESTful backend service built with Java 21 and Spring Boot 4. It handles the full lifecycle of projects and tasks, from creation to completion, with JWT-secured endpoints, a real PostgreSQL database, Docker containerisation, and a CI pipeline that runs on every push.
+**Project Manager API** is a RESTful backend service built with Java 21 and Spring Boot 4. It handles the full lifecycle of projects and tasks, from creation to completion, with JWT secured endpoints, a real PostgreSQL database, Docker containerisation, and a CI pipeline that runs on every push.
 
 This was built as a learning project to get Spring Boot, JPA, and REST design patterns into muscle memory, but every decision was made with production in mind.
 
@@ -73,7 +73,7 @@ src/
 │   ├── security/       # JWT filter, UserDetailsService, SecurityConfig
 │   └── exception/      # Global exception handler, custom exceptions
 └── test/
-    └── service/        # Unit tests — ProjectService (JUnit 5 + Mockito)
+    └── service/        # Unit tests ProjectService (JUnit 5 + Mockito)
 ```
 
 ---
@@ -83,8 +83,8 @@ src/
 ### 🔓 Auth (public)
 
 ```
-POST   /auth/register       Register a new user — returns JWT token
-POST   /auth/login          Login with email + password — returns JWT token
+POST   /auth/register       Register a new user, returns JWT token
+POST   /auth/login          Login with email and password, returns JWT token
 ```
 
 ### 🔒 Projects (Bearer token required)
@@ -138,7 +138,7 @@ curl http://localhost:8080/projects \
 
 ## 🚀 Quick Start
 
-### Option 1 - Docker (recommended)
+### Option 1: Docker (recommended)
 
 **Prerequisites:** Docker Desktop
 
@@ -158,7 +158,7 @@ docker-compose down
 docker-compose down -v
 ```
 
-### Option 2 - Maven
+### Option 2: Maven
 
 **Prerequisites:** Java 21, Maven
 
@@ -166,7 +166,7 @@ docker-compose down -v
 ./mvnw spring-boot:run
 ```
 
-Runs with H2 in-memory database. Data resets on restart.
+Runs with H2 in memory database. Data resets on restart.
 
 ---
 
@@ -200,7 +200,7 @@ Swagger UI is available when the app is running:
 http://localhost:8080/swagger-ui/index.html
 ```
 
-Every endpoint is listed with request/response schemas, validation rules, and a live "Try it out" button, no Postman needed.
+Every endpoint is listed with request/response schemas, validation rules, and a live "Try it out" button. No Postman needed.
 
 ---
 
@@ -235,10 +235,10 @@ Every endpoint is listed with request/response schemas, validation rules, and a 
 
 ## 📄 Status
 
-`Complete`  authentication, persistence, containerisation, and CI all in place.
+`Complete`, authentication, persistence, containerisation, and CI all in place.
 
 ---
 
 ## 🌱 Part of a larger learning arc
 
-This project sits within a broader series of backend builds. See my [profile](https://github.com/Lancelcode) for the full picture, including PulseDB (database engine from scratch) and protocol-level tool rebuilds.
+This project sits within a broader series of backend builds. See my [profile](https://github.com/Lancelcode) for the full picture, including PulseDB (database engine from scratch) and protocol level tool rebuilds.
